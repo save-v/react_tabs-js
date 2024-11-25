@@ -18,7 +18,7 @@ export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
                       onTabSelected(tab.id);
                     }
                   }}
-                  href={`#${activeTabId}`}
+                  href={`#${tab.id}`}
                   data-cy="TabLink"
                 >
                   {tab.title}
@@ -30,7 +30,7 @@ export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
       </div>
 
       <div className="block" data-cy="TabContent">
-        {tabs.find(tab => tab.id === activeTabId).content}
+        {(tabs.find(tab => tab.id === activeTabId) || tabs[0]).content}
       </div>
     </div>
   );

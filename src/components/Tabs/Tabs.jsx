@@ -1,6 +1,8 @@
 import cN from 'classnames';
 
 export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
+  const activeTab = tabs.find(tab => tab.id === activeTabId) || tabs[0];
+
   return (
     <div data-cy="TabsComponent">
       <div className="tabs is-boxed">
@@ -9,12 +11,12 @@ export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
             return (
               <li
                 key={tab.id}
-                className={cN({ 'is-active': tab.id === activeTabId })}
+                className={cN({ 'is-active': tab.id === activeTab.id })}
                 data-cy="Tab"
               >
                 <a
                   onClick={() => {
-                    if (tab.id !== activeTabId) {
+                    if (tab.id !== activeTab.id) {
                       onTabSelected(tab.id);
                     }
                   }}
@@ -30,7 +32,7 @@ export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
       </div>
 
       <div className="block" data-cy="TabContent">
-        {(tabs.find(tab => tab.id === activeTabId) || tabs[0]).content}
+        {activeTab.content}
       </div>
     </div>
   );
